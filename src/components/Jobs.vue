@@ -1,6 +1,8 @@
 <template>
   <div class="main">
-    <div><div v-on:click="getPrev">< prev</div> <div v-on:click="getNext">next ></div></div>
+    <div>
+        <div v-on:click="getPrev">< prev</div> {{ currPage}}/ {{ numPages }} <div v-on:click="getNext">next ></div>
+    </div>
     <div><post-list v-bind:posts="stories"></post-list></div>
   </div>
 </template>
@@ -16,6 +18,7 @@ export default ({
   data () {
     return {
       start : 0,
+      currPage : 1,
       resLength : 0,
       results : [],
       stories : []
@@ -24,10 +27,12 @@ export default ({
   methods : {
     getPrev() {
       if (this.resLength === 0) {
+        this.currPage = this.currPage - 1
         this.resLength = this.results.length % 10
         this.start = this.start - 10
         this.getPosts(this.start, this.start + 10)
-      } else if (this.resLength !== this.results.length - 10){
+      } else if (this.resLength !== this.results.length - 10) {
+        this.currPage = this.currPage - 1
         this.resLength = this.resLength + 10
         this.start = this.start - 10
         this.getPosts(this.start, this.start + 10)
@@ -35,10 +40,12 @@ export default ({
     },
     getNext() {
      if (this.resLength > 10) {
+        this.currPage = this.currPage + 1
         this.resLength = this.resLength - 10
         this.start = this.start + 10
         this.getPosts(this.start, this.start + 10)
       } else if(this.resLength < 10 && this.resLength !== 0) {
+        this.currPage = this.currPage + 1
         this.start = this.start + 10
         this.getPosts(this.start, this.start + this.resLength)
         this.resLength = 0
@@ -69,6 +76,11 @@ export default ({
         this.getPosts(this.start, this.start + 10)
       }
     }
+  },
+  computed: {
+      numPages() {
+        return Math.ceil(this.results.length / 10)
+      }
   }
 })
 </script>
