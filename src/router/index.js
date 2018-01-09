@@ -36,9 +36,7 @@ const routes = [
   }
 ]
 
-const router = new Router({
+export default new Router({
   routes,
   mode: 'history'
 })
-
-export default {router, routes}
