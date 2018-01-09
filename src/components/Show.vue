@@ -1,22 +1,51 @@
 <template>
-  <div id="about">
-  When you have a great story about how your product or service was built to change lives, share it. The "About Us" page is a great place for it to live, too. Good stories humanize your brand, providing context and meaning for your product. What’s more, good stories are sticky -- which means people are more likely to connect with them and pass them on.
+  <div class="main">
+    <div><post-list v-bind:posts="stories"></post-list></div>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'about'
-}
+import list from './List.vue'
+import Vue from 'vue'
+
+Vue.component('post-list', list)
+
+export default ({
+  name: 'New',
+  data () {
+    return {
+      results : [],
+      stories : []
+    }
+  },
+  methods : {
+    getPosts() {
+      for (let i = 0; i < 20; i++) {
+        let xhr = new XMLHttpRequest()
+        xhr.open('GET', 'https://hacker-news.firebaseio.com/v0/item/' + this.results[i] + '.json', true)
+        xhr.send()
+        xhr.onreadystatechange = () => {
+          if (xhr.status === 200 && xhr.readyState === 4) {
+            this.stories.push(JSON.parse(xhr.responseText))
+          }
+        }
+      }
+    }
+  },
+  mounted() {
+    let xhr = new XMLHttpRequest()
+    xhr.open('GET', 'https://hacker-news.firebaseio.com/v0/showstories.json', true)
+    xhr.send()
+    xhr.onreadystatechange = () => {
+      if (xhr.status === 200 && xhr.readyState === 4) {
+        this.results = JSON.parse(xhr.responseText)
+        this.getPosts()
+      }
+    }
+  }
+})
 </script>
 <!-- styling for the component -->
-<style>
-#about {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+
 </style>

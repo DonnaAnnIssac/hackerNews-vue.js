@@ -1,15 +1,17 @@
 <template>
-  <div class="hello">
-    <h2><top-list v-bind:posts="stories"></top-list></h2>
+  <div class="main">
+    <div><post-list v-bind:posts="stories"></post-list></div>
   </div>
 </template>
 
 <script>
-import topList from './TopList.vue'
+import list from './List.vue'
+import Vue from 'vue'
+
+Vue.component('post-list', list)
 
 export default ({
   name: 'Top',
-  components: { 'top-list': topList },
   data () {
     return {
       results : [],
@@ -41,25 +43,11 @@ export default ({
       }
     }
   }
-
 })
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
