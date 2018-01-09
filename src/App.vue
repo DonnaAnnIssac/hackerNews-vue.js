@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <router-link v-bind:to="'/'">Top</router-link>
+    <router-link v-bind:to="'/new'">New</router-link>
+    <router-link v-bind:to="'/ask'">Ask</router-link>
+    <router-link v-bind:to="'/show'">Show</router-link>
+    <router-link v-bind:to="'/jobs'">Jobs</router-link>
     <router-view/>
   </div>
 </template>
