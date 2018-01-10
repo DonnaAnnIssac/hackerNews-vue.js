@@ -5,6 +5,7 @@ import New from '@/components/New'
 import Ask from '@/components/Ask'
 import Show from '@/components/Show'
 import Jobs from '@/components/Jobs'
+import User from '@/components/User'
 
 Vue.use(Router)
 
@@ -33,6 +34,12 @@ const routes = [
     path: '/jobs',
     name: 'Jobs',
     component: Jobs
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: User,
+    props: true
   }
 ]
 
