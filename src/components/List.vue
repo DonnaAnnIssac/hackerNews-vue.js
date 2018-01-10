@@ -4,11 +4,12 @@
         <div class="card">
             <div>{{ post.score }}</div>
             <div>
-                <div> <strong>{{ post.title }}</strong> </div>
+                <a v-if="post.url" v-bind:href="post.url" target="_blank"><strong>{{ post.title }}</strong></a>
+                <div v-else><strong>{{ post.title }}</strong></div>
                 <div>
                     <div> by {{ post.by }} </div>
                     <div> {{ timeAgo(post.time) }} </div>
-                    <div> {{ post.descendants}} comments </div>
+                    <div v-if="post.descendants"> {{ post.descendants}} comments </div>
                 </div>
             </div>
         </div>
