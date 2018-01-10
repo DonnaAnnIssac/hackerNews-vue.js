@@ -7,7 +7,7 @@
                 <div> <strong>{{ post.title }}</strong> </div>
                 <div>
                     <div> by {{ post.by }} </div>
-                    <div> {{ post.time }} </div>
+                    <div> {{ timeAgo(post.time) }} </div>
                     <div> {{ post.descendants}} comments </div>
                 </div>
             </div>
@@ -18,6 +18,20 @@
 
 <script>
   export default {
-      props: ['posts']
+    props: ['posts'],
+    methods: {
+      timeAgo(time) {
+        let ts = new Date(time)
+        let nowTs = Math.floor(new Date().getTime()/1000)
+        let seconds = nowTs - ts
+        if (seconds > 2 * 24 * 3600) return Math.floor(seconds/(2 * 24 * 3600)) + " days ago"
+        if ( seconds > 24 * 3600) return "yesterday"
+        if (seconds > 2 * 3600) return Math.floor(seconds/3600) + " hours ago"
+        if (seconds > 3600) return "1 hour ago"
+        if (seconds > 60) return Math.floor(seconds/60) + " minutes ago"
+        if (seconds === 60) return "1 minute ago"
+        return seconds + " seconds ago"
+      }
+    }
   }
 </script>
