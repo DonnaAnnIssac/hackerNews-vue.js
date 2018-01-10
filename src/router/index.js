@@ -6,6 +6,7 @@ import Ask from '@/components/Ask'
 import Show from '@/components/Show'
 import Jobs from '@/components/Jobs'
 import User from '@/components/User'
+import Post from '@/components/Post'
 
 Vue.use(Router)
 
@@ -36,9 +37,15 @@ const routes = [
     component: Jobs
   },
   {
-    path: '/user',
+    path: '/user/:userinfo',
     name: 'user',
     component: User,
+    props: true
+  },
+  {
+    path: '/post/:postinfo',
+    name: 'postInfo',
+    component: Post,
     props: true
   }
 ]
