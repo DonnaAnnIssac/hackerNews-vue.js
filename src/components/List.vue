@@ -9,7 +9,9 @@
                 <div>
                     <router-link :to="{ name: 'user', params: {userinfo : post.by }}">by {{ post.by }} </router-link>
                     <div> {{ timeAgo(post.time) }} </div>
-                    <div v-if="post.descendants"> {{ post.descendants}} comments </div>
+                    <div v-if="post.descendants">
+                        <router-link :to="{ name: 'postInfo', params: {postinfo : post}}">{{ post.descendants}} comments</router-link>
+                    </div>
                 </div>
             </div>
         </div>
