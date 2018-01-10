@@ -7,7 +7,7 @@
                 <a v-if="post.url" v-bind:href="post.url" target="_blank"><strong>{{ post.title }}</strong></a>
                 <div v-else><strong>{{ post.title }}</strong></div>
                 <div>
-                    <div> by {{ post.by }} </div>
+                    <router-link :to="{ name: 'user', params: {userinfo : post.by }}">by {{ post.by }} </router-link>
                     <div> {{ timeAgo(post.time) }} </div>
                     <div v-if="post.descendants"> {{ post.descendants}} comments </div>
                 </div>
