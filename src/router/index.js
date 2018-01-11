@@ -43,8 +43,8 @@ const routes = [
     props: true
   },
   {
-    path: '/post/:postinfo',
-    name: 'postInfo',
+    path: '/post/:id',
+    name: 'post',
     component: Post,
     props: true
   }
