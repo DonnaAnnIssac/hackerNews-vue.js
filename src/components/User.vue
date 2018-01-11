@@ -25,7 +25,7 @@ export default {
         let ts = new Date(time)
         let nowTs = Math.floor(new Date().getTime()/1000)
         let seconds = nowTs - ts
-        if (seconds > 2 * 24 * 3600) return Math.floor(seconds/(2 * 24 * 3600)) + " days ago"
+        if (seconds > 2 * 24 * 3600) return Math.floor(seconds/(24 * 3600)) + " days ago"
         if ( seconds > 24 * 3600) return "yesterday"
         if (seconds > 2 * 3600) return Math.floor(seconds/3600) + " hours ago"
         if (seconds > 3600) return "1 hour ago"
