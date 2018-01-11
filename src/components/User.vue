@@ -35,7 +35,6 @@ export default {
       }
     },
     mounted() {
-      console.log('Mounted ' + this.userinfo)
       let xhr = new XMLHttpRequest()
       xhr.open('GET', 'https://hacker-news.firebaseio.com/v0/user/' + this.userinfo + '.json', true)
       xhr.send()
