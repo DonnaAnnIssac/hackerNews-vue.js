@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <div v-for="post in posts">
-        <div class="card">
-            <div>{{ post.score }}</div>
-            <div>
-                <a v-if="post.url" v-bind:href="post.url" target="_blank"><strong>{{ post.title }}</strong></a>
-                <div v-else><strong>{{ post.title }}</strong></div>
-                <div>
-                    <router-link :to="{ name: 'user', params: {userinfo : post.by }}">by {{ post.by }} </router-link>
-                    <div> {{ timeAgo(post.time) }} </div>
-                    <div v-if="post.descendants">
-                        <router-link :to="{ name: 'post', params: {id : post.id}}">{{ post.descendants }} comments</router-link>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div id="content">
+    <div class = "card" v-for="post in posts">
+      <div class="score">{{ post.score }}</div>
+      <div class="info">
+          <a v-if="post.url" v-bind:href="post.url" target="_blank"><strong>{{ post.title }}</strong></a>
+          <div v-else><strong>{{ post.title }}</strong></div>
+          <div class="postInfo">
+              <router-link :to="{ name: 'user', params: {userinfo : post.by }}">by {{ post.by }} </router-link>
+              <div class="time"> {{ timeAgo(post.time) }} </div>
+              <div v-if="post.descendants">
+                <router-link :to="{ name: 'post', params: {id : post.id}}">{{ post.descendants }} comments</router-link>
+              </div>
+              <div v-else><router-link :to="{ name: 'post', params: {id : post.id}}"> 0 comments </router-link></div>
+          </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,3 +37,36 @@
     }
   }
 </script>
+
+<style>
+  #content {
+    padding-top: 45px;
+  }
+  .card {
+    display: flex;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  }
+  .score {
+    min-width: 40px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f60;
+    font-weight: 500;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+  .info a{
+    text-decoration: none;
+    color: #34495e;
+  }
+  .postInfo {
+    display: flex;
+  }
+  .time {
+    margin: 0px 4px 0px 4px;
+  }
+</style>

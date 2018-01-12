@@ -1,16 +1,17 @@
 <template>
   <div class="main">
-     <div>
-        <div v-on:click="getPrev">< prev</div> {{ currPage}}/ {{ numPages }} <div v-on:click="getNext">next ></div>
+    <div class="nav">
+      <div id="prev" v-on:click="getPrev">< prev </div>
+      <span> {{ currPage }}/{{ numPages }} </span>
+      <div id="next" v-on:click="getNext"> next ></div>
     </div>
-    <div><post-list v-bind:posts="stories"></post-list></div>
+    <post-list v-bind:posts="stories"></post-list>
   </div>
 </template>
 
 <script>
 import list from './List.vue'
 import Vue from 'vue'
-
 Vue.component('post-list', list)
 
 export default ({
@@ -86,7 +87,27 @@ export default ({
 
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.main {
+  padding-top: 48px;
+  width: 100%;
+  margin: 0;
+  position: relative;
+}
+.nav {
+  display: flex;
+  width: 100%;
+  padding: 10px 50px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  position: fixed;
+  background-color: #fff;
+}
+#prev {
+  padding: 0px 5px;
+}
+#next {
+  padding: 0px 5px;
+}
 </style>

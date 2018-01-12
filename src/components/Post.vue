@@ -1,20 +1,20 @@
 <template>
-    <div v-if="postObj.title !== undefined"class="main">
-        <div class="card">
-          <div>{{postObj.title}}</div>
-          <div>
-            <div>{{postObj.score}}</div>
-            <div>by {{this.postObj.by}}</div>
-            <div>{{this.timeAgo(this.postObj.time)}}</div>
-          </div>
-        </div>
-        <div class="card">
-            <div>{{this.postObj.descendants}} comments</div>
-            <div v-for="kid in postObj.kids">
-              <comment-info :commentId="kid"></comment-info>
-            </div>
-        </div>
+  <div v-if="postObj.title !== undefined" class="main">
+    <div class="post">
+      <div><strong>{{postObj.title}}</strong></div>
+      <div class="info">
+        <div>{{postObj.score}} points</div>
+        <div>by {{this.postObj.by}}</div>
+        <div>{{this.timeAgo(this.postObj.time)}}</div>
+      </div>
     </div>
+    <div class="list">
+      <div>{{this.postObj.descendants}} comments</div>
+      <div v-for="kid in postObj.kids" class="card">
+        <comment-info :commentId="kid"></comment-info>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -55,3 +55,28 @@ export default {
   }
 }
 </script>
+<style>
+  .main {
+    padding-top: 48px;
+  }
+  .post {
+    box-shadow: 0 0px 1px rgba(0,0,0,0.3);
+    padding: 10px 0px;
+    padding-left: 15px;
+  }
+  .info {
+    display: flex;
+  }
+  .info div {
+    margin-right: 5px;
+  }
+  .list {
+    padding: 10px 0px;
+    padding-left: 15px;
+  }
+  .card {
+    box-shadow: 0 0px 1px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+</style>

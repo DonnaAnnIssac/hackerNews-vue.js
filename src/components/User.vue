@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <div v-if="userid !== null">
-            <div>User: {{userid.id}}</div>
-            <div>Created: {{timeAgo(userid.created)}}</div>
-            <div>Karma: {{userid.karma}}</div>
-            <a v-bind:href=fullSubmitUrl>submissions</a>
-            <a v-bind:href=fullCommentsUrl>comments</a>
-        </div>
-    </div>
+  <div class="card" v-if="userid !== null">
+      <div>User: {{userid.id}}</div>
+      <div>Created: {{timeAgo(userid.created)}}</div>
+      <div>Karma: {{userid.karma}}</div>
+      <div class="subs">
+        <a v-bind:href=fullSubmitUrl>submissions</a>
+        <a v-bind:href=fullCommentsUrl>comments</a>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -54,3 +54,19 @@ export default {
     }
 }
 </script>
+<style>
+  .card {
+    padding-top: 65px;
+    padding-bottom: 15px;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  }
+  .subs {
+    display: flex;
+  }
+  .subs a{
+    margin-right: 3px;
+  }
+</style>

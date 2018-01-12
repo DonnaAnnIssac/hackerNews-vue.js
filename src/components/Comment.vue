@@ -1,19 +1,19 @@
 <template>
-    <div>
-        <div v-if="commentObj.by !== undefined">
-            <div>{{this.commentObj.by}}</div>
-            <div>{{this.timeAgo(this.commentObj.time)}}</div>
-            <div v-html="this.commentObj.text"></div>
-            <div v-if="commentObj.kids">
-                <button v-on:click="showReplies">{{ numKids }} replies</button>
-                <div v-if="replies">
-                    <div v-for="kid in commentObj.kids">
-                        <comment-info :commentId="kid"></comment-info>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="comment" v-if="commentObj.by !== undefined">
+    <div class="info">
+      <div class="author">{{this.commentObj.by}}</div>
+      <div class="time">{{this.timeAgo(this.commentObj.time)}}</div>
     </div>
+    <div v-html="this.commentObj.text"></div>
+    <div v-if="commentObj.kids">
+      <div v-on:click="showReplies">{{ numKids }}</div>
+      <div v-if="replies">
+        <div v-for="kid in commentObj.kids">
+          <comment-info :commentId="kid"></comment-info>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -44,7 +44,8 @@ export default {
   },
   computed: {
     numKids() {
-      return this.commentObj.kids.length
+      if (this.commentObj.kids.length === 1) return this.commentObj.kids.length + " reply"
+      return this.commentObj.kids.length + " replies"
     }
   },
   mounted() {
@@ -59,3 +60,20 @@ export default {
   }
 }
 </script>
+<style>
+  .comment {
+    min-width: 800px;
+    background-color: #eeeeee;
+    padding: 10px 0px;
+    padding-left: 10px;
+  }
+  .info {
+    display: flex;
+  }
+  .author {
+    font-weight: 500;
+  }
+  .time {
+    font-weight: 300;
+  }
+</style>
