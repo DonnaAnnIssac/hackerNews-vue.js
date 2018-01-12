@@ -9,7 +9,8 @@
       </div>
     </div>
     <div class="list">
-      <div>{{this.postObj.descendants}} comments</div>
+      <div v-if="postObj.descendants > 0">{{this.postObj.descendants}} comments</div>
+      <div v-else>No comments yet</div>
       <div v-for="kid in postObj.kids" class="card">
         <comment-info :commentId="kid"></comment-info>
       </div>
